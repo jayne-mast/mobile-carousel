@@ -1,0 +1,104 @@
+.carousel {
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &, article, a, .items img {
+        width: 100%;
+    }
+    
+    article {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include transform(translateX(100%));
+        @include transition(transform 0s ease-out);
+
+        z-index: 3;
+
+        &.current {
+            @include transform(translateX(0%));
+            z-index: 2;
+            @include transition(transform .5s ease-out);
+        }
+
+        &.old-current {
+            @include transform(translateX(0%));
+            z-index: 1;
+        }
+
+        &:first-child {
+            position: relative;
+        }
+    }
+
+    .bubbles {
+        position: absolute;
+        z-index: 10;
+        font-size: 0;
+        line-height: 0;
+
+        span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: lightgrey;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+
+            @include hidpi {
+                box-shadow: 0 0 0 2px rgba(255,255,255,.5);
+            }
+
+            + span {
+                margin-left: 12px;
+            }
+
+            &.current {
+                background: lightgoldenrodyellow;
+            }
+        }
+
+        &.top {
+            top: 10px;
+        }
+        &.bottom {
+            bottom: 10px;
+        }
+        &.left {
+            left: 10px;
+        }
+        &.right {
+            right: 10px;
+        }
+        &.center {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    .arrows {
+        span {
+            position: absolute;
+            top: 50%;
+            margin-top: image-height("carousel-next.png") / -2;
+            z-index: 10;
+        }
+
+        .previous {
+            @include sprite("carousel-previous");
+            left: 15px;
+        }
+        .next {
+            @include sprite("carousel-next");
+            right: 15px;
+        }
+    }
+
+    .label {
+        position: absolute;
+        z-index: 10;
+        top: 10px;
+        right: 8px;
+    }
+}
